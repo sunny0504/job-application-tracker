@@ -1,5 +1,6 @@
 package com.goutham.JobApplicationTracking.service;
 
+import com.goutham.JobApplicationTracking.exception.ResourceNotFoundException;
 import com.goutham.JobApplicationTracking.model.JobEntity;
 import com.goutham.JobApplicationTracking.repository.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class JobService {
         return jobRepository.findAll();
     }
 
-    public Optional<JobEntity> getJobByIdService(Integer id){
-        return jobRepository.findById(id);
+    public JobEntity getJobByIdService(Integer id){
+        return jobRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Job ID not found"+id));
     }
 }
