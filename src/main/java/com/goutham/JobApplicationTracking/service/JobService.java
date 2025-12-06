@@ -13,13 +13,16 @@ import java.util.Optional;
 @Service
 public class JobService {
 
-    @Autowired
     public JobRepository jobRepository;
+
+    public JobService(JobRepository jobRepository){
+        this.jobRepository = jobRepository;
+    }
 
     public JobEntity createJobService(JobEntity job){
 
         job.setAppliedDate(LocalDate.now());
-        job.setApplicationStatus(true);
+        job.setApplicationStatus("APPLIED");
 
         return jobRepository.save(job);
     }
@@ -29,6 +32,6 @@ public class JobService {
     }
 
     public Optional<JobEntity> getJobByIdService(Integer id){
-        return  jobRepository.findById(id);
+        return jobRepository.findById(id);
     }
 }
