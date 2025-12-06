@@ -6,9 +6,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/job")
+@RequestMapping("/api/jobs")
 public class JobController {
 
     public JobService jobService;
@@ -25,5 +26,11 @@ public class JobController {
     @GetMapping
     public ResponseEntity<List<JobEntity>> getAllJobs(){
         return ResponseEntity.ok(jobService.getAllJobService());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<JobEntity> getJobById(@PathVariable Integer id){
+        Optional<JobEntity> jobDetails = jobService.getJobByIdService(id);
+        return jobDetails.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

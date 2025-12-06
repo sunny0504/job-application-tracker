@@ -16,7 +16,7 @@ public class JobEntity {
     private String companyName;
     private Integer salary;
     private String location;
-    private boolean applicationStatus; //APPLIED,INTERVIEW,OFFER,REJECTED
+    private String applicationStatus; //APPLIED,INTERVIEW,OFFER,REJECTED
     private LocalDate appliedDate;
 
     public Integer getJobId() {
@@ -59,11 +59,11 @@ public class JobEntity {
         this.location = location;
     }
 
-    public boolean isApplicationStatus() {
+    public String isApplicationStatus() {
         return applicationStatus;
     }
 
-    public void setApplicationStatus(boolean applicationStatus) {
+    public void setApplicationStatus(String applicationStatus) {
         this.applicationStatus = applicationStatus;
     }
 
