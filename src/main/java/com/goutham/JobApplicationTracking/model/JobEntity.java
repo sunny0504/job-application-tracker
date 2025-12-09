@@ -1,5 +1,6 @@
 package com.goutham.JobApplicationTracking.model;
 
+import com.goutham.JobApplicationTracking.ApplicationStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDate;
@@ -16,7 +17,8 @@ public class JobEntity {
     private String companyName;
     private Integer salary;
     private String location;
-    private String applicationStatus; //APPLIED,INTERVIEW,OFFER,REJECTED
+    @Enumerated(EnumType.STRING)
+    private ApplicationStatus applicationStatus; //APPLIED,INTERVIEW,OFFER,REJECTED
     private LocalDate appliedDate;
 
     public Integer getJobId() {
@@ -59,11 +61,11 @@ public class JobEntity {
         this.location = location;
     }
 
-    public String isApplicationStatus() {
+    public ApplicationStatus isApplicationStatus() {
         return applicationStatus;
     }
 
-    public void setApplicationStatus(String applicationStatus) {
+    public void setApplicationStatus(ApplicationStatus applicationStatus) {
         this.applicationStatus = applicationStatus;
     }
 

@@ -1,10 +1,10 @@
 package com.goutham.JobApplicationTracking.service;
 
+import com.goutham.JobApplicationTracking.ApplicationStatus;
+import com.goutham.JobApplicationTracking.dto.UpdateJobRequestDto;
 import com.goutham.JobApplicationTracking.exception.ResourceNotFoundException;
 import com.goutham.JobApplicationTracking.model.JobEntity;
 import com.goutham.JobApplicationTracking.repository.JobRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -23,7 +23,7 @@ public class JobService {
     public JobEntity createJobService(JobEntity job){
 
         job.setAppliedDate(LocalDate.now());
-        job.setApplicationStatus("APPLIED");
+        job.setApplicationStatus(ApplicationStatus.APPLIED);
 
         return jobRepository.save(job);
     }
@@ -33,6 +33,19 @@ public class JobService {
     }
 
     public JobEntity getJobByIdService(Integer id){
-        return jobRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Job ID not found"+id));
+        return jobRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Job not found with id: "+id));
+    }
+
+    public JobEntity updateJob(Integer id, UpdateJobRequestDto dto){
+            JobEntity job = jobRepository.findById(id)
+                    .orElseThrow(() -> new ResourceNotFoundException("Job not found with id: " + id));
+
+            job.setJobRoleName(dto.getJobRoleName());
+            job.setCompanyName(dto.getCompanyName());
+            job.setLocation(dto.getLocation());
+            job.setSalary(dto.getSalary());
+            job.setApplicationStatus(dto.getApplicationStatus());
+
+            return jobRepository.save(job);
     }
 }
