@@ -1,5 +1,6 @@
 package com.goutham.JobApplicationTracking.controller;
 
+import com.goutham.JobApplicationTracking.dto.ApiResponseDto;
 import com.goutham.JobApplicationTracking.dto.UpdateJobRequestDto;
 import com.goutham.JobApplicationTracking.model.JobEntity;
 import com.goutham.JobApplicationTracking.service.JobService;
@@ -28,18 +29,19 @@ public class JobController {
     }
 
     @GetMapping
-    public ResponseEntity<List<JobEntity>> getAllJobs(){
-        return ResponseEntity.ok(jobService.getAllJobService());
+    public ResponseEntity<ApiResponseDto<List<JobEntity>>> getAllJobs(){
+        System.out.println("Get all Jobs Hit");
+        return ResponseEntity.ok(ApiResponseDto.success(200,"Jobs fetched successfully",jobService.getAllJobService()));
     }
 
     @GetMapping("/{id}")
-    public JobEntity getJobById(@PathVariable Integer id){
-        return jobService.getJobByIdService(id);
+    public ResponseEntity<ApiResponseDto<JobEntity>> getJobById(@PathVariable Integer id){
+        return ResponseEntity.ok(ApiResponseDto.success(200,"Job fetched successfully",jobService.getJobByIdService(id)));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<JobEntity> updateJob(@PathVariable Integer id, @Valid @RequestBody UpdateJobRequestDto dto){
+    public ResponseEntity<ApiResponseDto<JobEntity>> updateJob(@PathVariable Integer id, @Valid @RequestBody UpdateJobRequestDto dto){
         JobEntity updated = jobService.updateJob(id, dto);
-        return ResponseEntity.ok(updated);
+        return ResponseEntity.ok(ApiResponseDto.success(200,"Job Updated successfully",updated));
     }
 }

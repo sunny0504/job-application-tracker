@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class JobService {
@@ -29,6 +28,7 @@ public class JobService {
     }
 
     public List<JobEntity> getAllJobService(){
+        System.out.println(jobRepository.findAll());
         return jobRepository.findAll();
     }
 
