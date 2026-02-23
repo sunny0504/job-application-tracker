@@ -34,6 +34,6 @@ jobs:
         with:
           args: >
             -Dsonar.projectKey=sunny0504_job-application-tracker
-            -Dsonar.organization=suny0504
+            -Dsonar.organization=sunny0504
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
