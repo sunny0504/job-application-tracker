@@ -30,7 +30,6 @@ public class JobController {
 
     @GetMapping
     public ResponseEntity<ApiResponseDto<List<JobEntity>>> getAllJobs(){
-        System.out.println("Get all Jobs Hit");
         return ResponseEntity.ok(ApiResponseDto.success(200,"Jobs fetched successfully",jobService.getAllJobService()));
     }
 

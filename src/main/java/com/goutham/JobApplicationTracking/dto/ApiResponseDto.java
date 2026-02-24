@@ -1,6 +1,5 @@
 package com.goutham.JobApplicationTracking.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 

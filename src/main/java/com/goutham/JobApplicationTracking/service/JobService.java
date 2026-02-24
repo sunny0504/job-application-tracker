@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class JobService {
 
-    public JobRepository jobRepository;
+    private final JobRepository jobRepository;
 
     public JobService(JobRepository jobRepository){
         this.jobRepository = jobRepository;
@@ -28,7 +28,6 @@ public class JobService {
     }
 
     public List<JobEntity> getAllJobService(){
-        System.out.println(jobRepository.findAll());
         return jobRepository.findAll();
     }
 
